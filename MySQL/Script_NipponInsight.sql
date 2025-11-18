@@ -29,6 +29,7 @@ CREATE TABLE viagem (
     estacao VARCHAR(10),
     dtIda DATE,
     dtVolta DATE,
+    qtdPessoas INT,
     valorGuardado DECIMAL(10,2),
 		CONSTRAINT fkUsuarioViagem
 			FOREIGN KEY(fkUsuario)
@@ -36,8 +37,8 @@ CREATE TABLE viagem (
 ) AUTO_INCREMENT = 1000;
 
 INSERT INTO viagem VALUES
-	(DEFAULT, 1, 'PRIMAVERA', '2026-03-25', '2026-04-08', 5000.00),
-	(DEFAULT, 2, 'OUTONO', '2026-10-05', '2026-10-12', 10000.00);
+	(DEFAULT, 1, 'PRIMAVERA', '2026-03-25', '2026-04-08', 1, 5000.00),
+	(DEFAULT, 2, 'OUTONO', '2026-10-05', '2026-10-12', 2, 10000.00);
     
 SELECT * FROM viagem;
 -- ------------------------------------- FIM TABELA viagem ---------------------------------------

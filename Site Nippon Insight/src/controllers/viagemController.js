@@ -21,6 +21,7 @@ function cadastrar(req, res) {
   var estacao = req.body.estacaoServer;
   var dtIda = req.body.dtIdaServer;
   var dtVolta = req.body.dtVoltaServer;
+  var qtdPessoas = req.body.qtdPessoasServer;
   var valorGuardado = req.body.valorGuardadoServer;
 
   if (fkUsuario == undefined) {
@@ -41,7 +42,7 @@ function cadastrar(req, res) {
   }
 
 
-  viagemModel.cadastrar(fkUsuario, estacao, dtIda, dtVolta, valorGuardado)
+  viagemModel.cadastrar(fkUsuario, estacao, dtIda, dtVolta, qtdPessoas, valorGuardado)
     .then((resultado) => {
       res.status(201).json(resultado);
     }

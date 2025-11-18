@@ -86,6 +86,11 @@
             <input id="dt_volta_input" type="date" />
           </div>
           <div class="campo">
+            <span>Quantidade de pessoas: </span>
+            <br>
+            <input id="qtd_pessoas.input" type="number" />
+          </div>
+          <div class="campo">
             <span>Valor guardado para a viagem:</span>
             <br>
             <input id="valor_guardado_input" type="number" placeholder="Em reais, ex. 3000.00" />
@@ -125,6 +130,7 @@
 </html>
 
 <script>
+  
 
   function cadastrar() {
     // aguardar();
@@ -135,6 +141,7 @@
     var estacaoVar = select_estacao.value;
     var dtIdaVar = dt_ida_input.value;
     var dtVoltaVar = dt_volta_input.value;
+    var qtdPessoasVar = qtd_pessoas.input.value;
     var valorGuardadoVar = Number(valor_guardado_input.value);
 
 
@@ -167,6 +174,7 @@
           estacaoServer: estacaoVar,
           dtIdaServer: dtIdaVar,
           dtVoltaServer: dtVoltaVar,
+          qtdPessoasServer: qtdPessoasVar,
           valorGuardadoServer: valorGuardadoVar
         }),
       })

@@ -8,9 +8,9 @@ function buscarViagemPorUsuario(idUsuario) {
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(fkUsuario, estacao, dtIda, dtVolta, valorGuardado) {
+function cadastrar(fkUsuario, estacao, dtIda, dtVolta, qtdPessoas, valorGuardado) {
   
-  var instrucaoSql = `INSERT INTO viagem (fkUsuario, estacao, dtIda, dtVolta, valorGuardado) VALUES (${fkUsuario}, '${estacao}', '${dtIda}', '${dtVolta}', ${valorGuardado})`;
+  var instrucaoSql = `INSERT INTO viagem (fkUsuario, estacao, dtIda, dtVolta, qtdPessoas, valorGuardado) VALUES (${fkUsuario}, '${estacao}', '${dtIda}', '${dtVolta}', ${qtdPessoas}, ${valorGuardado})`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
