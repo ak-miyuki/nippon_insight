@@ -195,8 +195,13 @@
     console.log(`Esse é o idViagem: `, idViagem);
 
     fetch(`/viagem/${sessionStorage.ID_USUARIO}`)
-        .then(resposta => resposta.json()).then(json => {
-            sessionStorage.VIAGEM = JSON.stringify(json.idViagem);
+        .then(function (resposta) {
+            // console.log(`resposta.json(): `, resposta.json)
+
+            resposta.json()
+                .then(function (respostaJson) {
+                    sessionStorage.ID_VIAGEM = JSON.stringify(respostaJson.idViagem);
+                })
         });
 
     function atualizarPagina() {
@@ -209,32 +214,35 @@
             .then(response => response.json())
             .then(listaViagem => {
 
+                if (listaViagem.length === 0) {
+                    alert("errinho");
+                } else {
+                    if (idViagem == undefined) {
+                        idViagem = listaViagem[0].idViagem;
+                    }
+                    console.log('idViagem após fetch = ', idViagem);
 
-                if (idViagem == undefined) {
-                    iViagem = listaViagem[0].idViagem;
+                    span_estacao.innerHTML = listaViagem[0].estacao;
+                    span_dt_ida.innerHTML = listaViagem[0].dtIda;
+                    span_dt_volta.innerHTML = listaViagem[0].dtVolta;
+                    span_dias_japao.innerHTML = listaViagem[0].diasJapao;
+                    span_qtd_pessoas.innerHTML = listaViagem[0].qtdPessoas;
+
+                    valor_guardado = Number(listaViagem[0].valorGuardado);
+                    span_valor_guardado.innerHTML = valor_guardado.toLocaleString('pt-BR', { style: "currency", currency: 'BRL' });
+
+                    valorTotal = Number(listaViagem[0].valorTotal);
+                    span_valor_viagem.innerHTML = valorTotal.toLocaleString('pt-BR', { style: "currency", currency: 'BRL' });
+
+                    var progresso = listaViagem[0].percentualGuardado;
+
+                    porcentagem_progresso.innerHTML = `${progresso}%`;
+
+                    if (progresso > 100) {
+                        progresso = 100
+                    }
+                    barra_porcentagem.style.width = `${progresso}%`;
                 }
-                console.log('idViagem após fetch = ', idViagem);
-
-                span_estacao.innerHTML = listaViagem[0].estacao;
-                span_dt_ida.innerHTML = listaViagem[0].dtIda;
-                span_dt_volta.innerHTML = listaViagem[0].dtVolta;
-                span_dias_japao.innerHTML = listaViagem[0].diasJapao;
-                span_qtd_pessoas.innerHTML = listaViagem[0].qtdPessoas;
-
-                valor_guardado = Number(listaViagem[0].valorGuardado);
-                span_valor_guardado.innerHTML = valor_guardado.toLocaleString('pt-BR', { style: "currency", currency: 'BRL' });
-
-                valorTotal = Number(listaViagem[0].valorTotal);
-                span_valor_viagem.innerHTML = valorTotal.toLocaleString('pt-BR', { style: "currency", currency: 'BRL' });
-
-                var progresso = listaViagem[0].percentualGuardado;
-
-                porcentagem_progresso.innerHTML = `${progresso}%`;
-
-                if (progresso > 100) {
-                    progresso = 100
-                }
-                barra_porcentagem.style.width = `${progresso}%`;
 
             })
             .catch(error => console.error('Erro ao buscar dados:', error));

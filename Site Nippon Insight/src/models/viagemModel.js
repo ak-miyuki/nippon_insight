@@ -11,8 +11,15 @@ function buscarViagemPorUsuario(idUsuario) {
 
 function cadastrar(fkUsuario, estacao, dtIda, dtVolta, qtdPessoas, valorGuardado) {
 
-  var instrucaoSql = `INSERT INTO viagem (fkUsuario, estacao, dtIda, dtVolta, qtdPessoas, valorGuardado) VALUES 
-                        (${fkUsuario}, '${estacao}', '${dtIda}', '${dtVolta}', ${qtdPessoas}, ${valorGuardado})`;
+  var instrucaoSql = `INSERT INTO viagem (fkUsuario, estacao, dtIda, dtVolta, qtdPessoas, valorGuardado) VALUES (${fkUsuario}, '${estacao}', '${dtIda}', '${dtVolta}', ${qtdPessoas}, ${valorGuardado})`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function cadastrar_idViagem(fkUsuario) {
+
+  var instrucaoSql = `INSERT INTO viagem (fkUsuario) VALUES (${fkUsuario})`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -29,8 +36,7 @@ function atualizarViagem(fkUsuario, estacao, dtIda, dtVolta, qtdPessoas, valorGu
 
 function atualizarCaixinha(idUsuario, novoValorGuardado) {
 
-  var instrucaoSql = `UPDATE viagem SET valorGuardado = ${novoValorGuardado} 
-                        WHERE fkUsuario = ${idUsuario};`;
+  var instrucaoSql = `UPDATE viagem SET valorGuardado = ${novoValorGuardado} WHERE fkUsuario = ${idUsuario};`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -40,6 +46,7 @@ function atualizarCaixinha(idUsuario, novoValorGuardado) {
 module.exports = {
   buscarViagemPorUsuario,
   cadastrar,
+  cadastrar_idViagem,
   atualizarViagem,
   atualizarCaixinha
 }

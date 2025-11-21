@@ -218,14 +218,16 @@ CREATE OR REPLACE VIEW vw_dadosViagem AS
                     ((TIMESTAMPDIFF(DAY, dtIda, dtVolta)) - 2) AS diasJapao,
 					v.qtdPessoas,
 					v.valorGuardado,
-                    v2.valorTotal,
-                    ROUND(((v.valorGuardado / v2.valorTotal) * 100), 0) AS percentualGuardado
+                    IFNULL(v2.soma, 0) AS valorTotal,
+                    CASE WHEN v2.soma IS NULL OR v2.soma = 0 THEN 0
+						ELSE ROUND(((v.valorGuardado / v2.soma) * 100), 0)
+					END AS percentualGuardado
 						FROM viagem AS v
 						JOIN usuario AS u ON v.fkUsuario = u.idUsuario
-						JOIN (SELECT e.fkViagem AS idViagem,
-									SUM(e.qtd * i.preco) AS valorTotal
+						LEFT JOIN (SELECT e.fkViagem AS idViagem,
+									SUM(e.qtd * i.preco) AS soma
 								FROM escolha AS e	
-								JOIN item AS i ON i.idItem = e.fkItem
+								INNER JOIN item AS i ON i.idItem = e.fkItem
 								GROUP BY e.fkViagem) v2 ON v2.idViagem = v.idViagem;
                             
 SELECT * FROM vw_dadosViagem;
@@ -235,7 +237,7 @@ SELECT * FROM vw_dadosViagem;
 	WHERE fkUsuario = ${idUsuario};`
 -----------------------------------------------------------------------------------------------------------------------
 */
-
+select * from viagem;
 /*
 --------------------------------------- VIEW DA TABELA USUÁRIO JOIN VEIAGEM: ---------------------------------------
 */

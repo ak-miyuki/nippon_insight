@@ -4,8 +4,11 @@ function buscarViagemPorUsuario(req, res) {
   var idUsuario = req.params.idUsuario;
 
   viagemModel.buscarViagemPorUsuario(idUsuario).then((resultado) => {
+    console.log(resultado);
+
     if (resultado.length > 0) {
       res.status(200).json(resultado);
+      res.json(resultado)
     } else {
       res.status(204).json([]);
     }
@@ -15,7 +18,32 @@ function buscarViagemPorUsuario(req, res) {
     res.status(500).json(erro.sqlMessage);
   });
 }
+//  ------------------------ FUNÇÃO CADASTRAR fkUsuario na tabela viagem ------------------------
 
+function cadastrar_idViagem(req, res) {
+  var fkUsuario = req.body.fkUsuarioServer;
+
+
+  if (fkUsuario == undefined) {
+    res.status(400).send("idUsuario está undefined!");
+  }
+
+  viagemModel.cadastrar_idViagem(fkUsuario)
+    .then((resultado) => {
+      res.status(201).json(resultado);
+    }
+    ).catch((erro) => {
+      console.log(erro);
+      console.log(
+        "\nHouve um erro ao realizar o cadastro! Erro: ",
+        erro.sqlMessage
+      );
+      res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+// ----------------------------------------------------------------------------------------------
 function cadastrar(req, res) {
   var fkUsuario = req.body.fkUsuarioServer;
   var estacao = req.body.estacaoServer;
@@ -125,6 +153,7 @@ function atualizarCaixinha(req, res) {
 module.exports = {
   buscarViagemPorUsuario,
   cadastrar,
+  cadastrar_idViagem,
   atualizarViagem,
   atualizarCaixinha
 }

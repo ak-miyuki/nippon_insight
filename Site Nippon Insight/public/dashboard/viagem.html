@@ -141,7 +141,9 @@
     var dtVoltaVar = dt_volta_input.value;
     var qtdPessoasVar = qtd_pessoas_input.value;
     var valorGuardadoVar = Number(valor_guardado_input.value);
+  var idViagem = sessionStorage.ID_VIAGEM;
 
+      console.log(idViagem)
 
     // Verificando se há algum campo em branco
     if (
@@ -158,11 +160,9 @@
       return false;
     } else {
 
-      var viagem = null;
+      console.log(`idViagem:  `, idViagem);
 
-      var idViagem = sessionStorage.ID_VIAGEM;
-
-      if (idViagem == null) {
+      if (idViagem == 'null') {
 
         // Enviando o valor da nova input
         fetch("/viagem/cadastrar", {
@@ -181,14 +181,31 @@
           }),
         })
           .then(function (resposta) {
-            console.log("resposta: ", resposta);
+            console.log("1. resposta: ", resposta);
 
             if (resposta.ok) {
 
-              fetch(`/viagem/${sessionStorage.ID_USUARIO}`)
-                .then(resposta => resposta.json()).then(json => {
-                  sessionStorage.VIAGEM = JSON.stringify(json.viagem);
-                });
+
+              resposta.json()
+              .then(function (respostaFormatada) {
+                console.log(respostaFormatada)
+                console.log(respostaFormatada.insertId)
+
+                var idViagem = respostaFormatada.insertId;
+
+                sessionStorage.ID_VIAGEM = idViagem;
+                
+                // fetch(`/viagem/${sessionStorage.ID_USUARIO}`)
+                //   .then(function (resposta){
+                //     console.log(resposta)
+  
+                //     resposta.json().then(json => {
+                //       console.log(json)
+                //   }); 
+                // }
+                // )
+              })
+
 
 
               cardErro.style.display = "block";
@@ -196,9 +213,9 @@
               mensagem_erro.innerHTML =
                 "Cadastro realizado com sucesso! Redirecionando para a página do questionário...";
 
-              setTimeout(() => {
-                window.location = "dashboard.html";
-              }, "2000");
+              // setTimeout(() => {
+              //   window.location = "dashboard.html";
+              // }, "2000");
 
               finalizarAguardar();
             } else {
@@ -238,9 +255,9 @@
               mensagem_erro.innerHTML =
                 "Cadastro realizado com sucesso! Redirecionando para a página do questionário...";
 
-              setTimeout(() => {
-                window.location = "dashboard.html";
-              }, "2000");
+              // setTimeout(() => {
+              //   window.location = "dashboard.html";
+              // }, "2000");
 
               finalizarAguardar();
             } else {
