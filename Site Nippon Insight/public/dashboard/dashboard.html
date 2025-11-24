@@ -144,7 +144,7 @@
                     <div class="container">
 
                         <!-- GRÁFICO DE BARRAS -->
-                        <canvas id="grafico_barras"></canvas>
+                        <canvas id="grafico_barras" width="400px" height="400px"></canvas>
                     </div>
 
                 </div>
@@ -252,80 +252,156 @@
             })
             .catch(error => console.error('Erro ao buscar dados:', error));
 
-        plotarGraficoPizza();
+        obterDadosGraficoPizza();
     }
 
-    function plotarGraficoPizza() {
+    function obterDadosGraficoPizza() {
+
+        fetch(`/escolhas/${idViagem}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        plotarGraficoPizza(resposta, idViagem);
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico de pizza: ${error.message}`);
+            });
+    }
+
+    function plotarGraficoPizza(resposta, idViagem) {
 
         Chart.defaults.font.family = 'Montserrat';
         Chart.defaults.color = '#e3b062';
 
-        fetch(`/escolhas/${idViagem}`, { cache: 'no-store' })
-            .then(response => response.json())
-            .then(dados => {
+        console.log('iniciando plotagem do gráfico de pizza...');
 
+        var categorias = [];
+        var valores = [];
 
+        for (var i = 0; i < resposta.length; i++) {
+            categorias.push(resposta[i].categoria);
+            valores.push(resposta[i].valorTotal);
+        }
 
-                var categorias = [];
-                var valores = [];
+        if (categorias.length > 0) {
+            div_container_pizza.style.display = "block"
+        }
 
-                for (var i = 0; i < dados.length; i++) {
-                    categorias.push(dados[i].categoria);
-                    valores.push(dados[i].valorTotal);
-                }
-
-                if (categorias.length > 0) {
-                    div_container_pizza.style.display = "block"
-                }
-
-
-                var ctx = document.getElementById("grafico_pizza").getContext("2d");
-
-                new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: categorias,
-                        datasets: [{
-                            data: valores,
-                            backgroundColor: [
-                                '#741c32',
-                                '#e3b062',
-                                '#bd6088',
-                                '#dfd4be'
-
-                            ],
-                            borderColor: '#c4b28b',
-                            borderWidth: 2
-                        }]
-                    },
-                    plugins: [ChartDataLabels],
-                    options: {
-                        responsive: true,
-                        aspectRatio: 1.2,
-                        plugins: {
-                            legend: {
-                                position: 'right'
-                            }
-                        }
+        var config = {
+            type: 'pie',
+            data: {
+                labels: categorias,
+                datasets: [{
+                    data: valores,
+                    backgroundColor: [
+                        '#741c32',
+                        '#e3b062',
+                        '#bd6088',
+                        '#dfd4be'
+                        
+                    ],
+                    borderColor: '#c4b28b',
+                    borderWidth: 2
+                }]
+            },
+            // plugins: [ChartDataLabels],
+            options: {
+                responsive: true,
+                aspectRatio: 1.2,
+                plugins: {
+                    legend: {
+                        position: 'right'
                     }
-                });
-            })
-            .catch(erro => console.error("Erro no gráfico:", erro));
+                }
+            }
+        };
 
+        let myChart = new Chart(document.getElementById("grafico_pizza"), config);
     }
+        
+function obterDadosGraficoBarras() {
 
+        fetch(`/escolhas/${idViagem}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
 
+                        plotarGraficoBarras(resposta, idViagem);
 
-
-
-
-
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico de barra: ${error.message}`);
+            });
+    }
 
     function plotarGraficoBarras(resposta, tipo) {
 
+        Chart.defaults.font.family = 'Montserrat';
+        Chart.defaults.color = '#e3b062';
 
+        console.log('iniciando plotagem do gráfico de barra...');
 
+        var categorias = [];
+        var valores = [];
+
+        for (var i = 0; i < resposta.length; i++) {
+            categorias.push(resposta[i].categoria);
+            valores.push(resposta[i].valorTotal);
+        }
+
+        if (categorias.length > 0) {
+            div_container_barra.style.display = "block"
+        }
+
+        var config = {
+            type: 'bar',
+            data: {
+                labels: categorias,
+                datasets: [{
+                    data: valores,
+                    axis: 'y',
+                    backgroundColor: [
+                        '#741c32',
+                        '#e3b062',
+                        '#bd6088',
+                        '#dfd4be'
+                        
+                    ],
+                    borderColor: '#c4b28b',
+                    borderWidth: 2
+                }]
+            },
+            // plugins: [ChartDataLabels],
+            options: {
+                responsive: true,
+                aspectRatio: 1.2,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        };
+
+        let myChart = new Chart(document.getElementById("grafico_barras"), config);
     }
+
+
+
 
 
 
@@ -380,12 +456,6 @@
 
         return false;
     }
-
-
-
-
-
-
 
     function sumirMensagem() {
         cardErro.style.display = "none";
