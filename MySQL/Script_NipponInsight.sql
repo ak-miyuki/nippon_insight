@@ -16,8 +16,8 @@ CREATE TABLE usuario (
 );
 
 INSERT INTO usuario (nome, email, senha) VALUES
-	('Ana', 'ana@email.com', '12345678aA@'),
-	('Breno', 'breno@email.com', '12345678aA@');
+	('Ana', 'ana@email.com', '12345aA@'),
+	('Breno', 'breno@email.com', '12345aA@');
     
 SELECT * FROM usuario;
 -- ------------------------------------- FIM TABELA usuario --------------------------------------
@@ -327,25 +327,7 @@ SELECT idUsuario,
         
 					
                 
--- CREATE VIEW vw_valor_dia AS
-	SELECT idUsuario AS id,
-			nome AS usuario,
-			categoria AS cat,
-			SUM(preco*qtd) AS soma
-				FROM usuario
-				JOIN viagem ON fkUsuario = idUsuario
-				JOIN escolha ON fkViagem = idViagem
-				JOIN item ON fkItem = idItem
-					GROUP BY idViagem, categoria, nome;
 
-SELECT * FROM vw_valor_dia;
-desc vw_valor_dia;
-
-SELECT id AS idUsuario,
-		cat AS 'Categoria',
-		soma DIV dias AS 'Valor médio por dia'  
-			FROM vw_valor_dia
-				WHERE id = 1;
                 
 /* ------------------------------------------------------------------------
 `SELECT id AS idUsuario,
@@ -373,12 +355,9 @@ SELECT idUsuario AS id,
 
 SELECT * FROM viagem WHERE IFNULL(fkUsuario, 1);
 
-UPDATE usuario SET nome = 'Dante', email = 'dante@email.com' where idUsuario = 3;
-
 select * from usuario;
 
-DELETE FROM escolha WHERE fkViagem = 1001 AND fkItem = 5039;
-
-
 select * from viagem;
+
+
 
