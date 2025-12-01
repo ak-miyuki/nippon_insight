@@ -156,11 +156,11 @@ body {
   border-radius: 5px;
   border: 2px solid #c4b28b;
   background-color: #101010;
-  }
+}
 
 .categoria {
   width: 100%;
-  height: 7vh;
+  min-height: 7vh;
   align-self: flex-start;
   justify-content: center;
   display: flex;
@@ -171,9 +171,18 @@ body {
 }
 
 .conteudo_info {
+  width: 95%;
+  height: fit-content;
   display: flex;
   justify-content: space-evenly;
+  justify-self: center;
+  align-self: center;
   padding: 30px;
+  margin-bottom:20px;
+  background-color: transparent;
+  box-shadow: -5px 5px 10px #fde0a1;
+  border-radius: 7px;
+  border: 2px solid #fde0a1;
 
 }
 
@@ -182,17 +191,38 @@ body {
   height: 200px;
   align-self: center;
   justify-self: center;
-  background-image: linear-gradient(to bottom, #741c32, #bb6c85);
+  
+}
+
+.foto img {
+  height: 100%;
+  width: 100%;
+  border-radius: 7px;
 }
 
 .info {
-  width: 30vw;;
+  width: 30vw;
+  ;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  background-image: linear-gradient(to bottom, #741c32, #bb6c85);
+  justify-content: flex-start;
 
 }
+
+.opcoes .conteudo_info .info .item_nome {
+  font-weight: 800;
+  span {
+    background-image: linear-gradient(to top right, #dfd4be, #c6a765, #bd6088, #9f3254);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 30px;
+    font-weight: 900;
+  }
+  margin-bottom: 15px;
+}
+
 
 .input_qtd {
   width: 200px;
@@ -202,9 +232,9 @@ body {
   align-self: center;
   justify-self: center;
   justify-content: space-evenly;
-  background-image: linear-gradient(to bottom, #741c32, #bb6c85);
+  text-align: center;
   gap: 7px;
-  
+
 }
 
 .opcoes h3 {
@@ -225,7 +255,7 @@ body {
 }
 
 .opcoes span {
-  color: #c4a158;
+  color: #f5eede;
   font-weight: 100;
   align-self: center;
   justify-self: center;
@@ -235,11 +265,12 @@ body {
 .buttons {
   display: flex;
   justify-content: center;
-  }
+}
 
-  .buttons button {
-    margin: 7px 7px 7px 7px;
-  }
+.buttons button {
+  margin: 7px 7px 7px 7px;
+}
+
 
 /* ------------------------ PÁGINA ESCOLHAS  END ------------------------ */
 
@@ -412,11 +443,11 @@ body .janela {
 }
 
 .grafico_esquerda .container {
-    width: 100%;
-    max-width: 480px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 .dash .graficos_todos .graficos_direita {

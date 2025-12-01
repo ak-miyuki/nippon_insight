@@ -6,7 +6,7 @@
 */
 CREATE DATABASE nipponInsight;
 USE nipponInsight;
-
+-- drop database nipponInsight;
 -- ---------------- TABELA usuario QUE RECEBE OS DADOS DO FORMULÁRIO DE CADASTRO -----------------
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -56,90 +56,94 @@ CREATE TABLE item (
 
 
 INSERT INTO item (nomeItem, descricao, preco, tipo, categoria, foto) VALUES
-	
--- LOCAIS
-	('Tokyo (Tóquio)', 'Cidade de Tóquio, capital do Japão, une o tradicional ao moderno, a cidade mais tecnológica do Japão, tem vários bairros famosos como Shibuya, Shinjuku, Ginza, Akihabara, Harajuku e Odaiba', 0, 'Cidade','Lugar', NULL), -- Tokyo
-	('Yokohama', 'Cidade de Yokohama, importante centro de comércio internacional, moderna e onde muitos filmes e doramas são gravados', 0, 'Cidade','Lugar', NULL), -- Tokyo
-	('Kyoto (Quioto)', 'Cidade de Quioto, antiga capital do Japão tem muitos templos e bairros antigos e você pode experimentar muito da cultura tradicional japonesa, comer doces típicos e ver gueixas, ninjas e samurais', 0, 'Cidade','Lugar', NULL), -- Kyoto
-	('Osaka', 'Cidade de Osaka, uma das grandes cidades do Japão, tem aeroporto internacional, outlets, e é lá que fica a Universal Studios', 0, 'Cidade','Lugar', NULL), -- Osaka
-	('Hiroshima', 'Cidade de Hiroshima, cidade onde caiu uma das bombas nucleares, é possível ver um pouco da história em locais preservados, aprender no museu e presenciar o resultado da restauração da destruição. Ela existe como um símbolo da paz, para nos lembrar dos estragos que ataques nucleares podem causar', 0, 'Cidade','Lugar', NULL), -- Hiroshima
-	('Fukuoka', 'Cidade de Fukuoka, cidade com praias, templos e shopping modernos', 0, 'Cidade','Lugar', NULL), -- Fukuoka
-	('Sapporo', 'Cidade de Sapporo, conhecida pela gastronomia e pelo famoso festival da neve, onde enormes esculturas de neve e gelo são expostas no início do ano', 0, 'Cidade','Lugar', NULL), -- Sapporo
-	('Okinawa', 'Região de praias de areia branca e águas cristalinas com grande variedade de corais e vida submarina.', 0, 'Região','Lugar', NULL), -- Okinawa
-	('Mt. Fuji', 'Monte Fuji, é possível escalar o monte Fuji nos meses de julho a setembro', 140.00, 'Região','Lugar', NULL), -- Mt Fuji
-    
-	('Tokyo Disneyland', 'A Disneyland do Japão, um parque temático fantástico do reino da fantasia', 270.00, 'Atração','Lugar', NULL), -- Tokyo Disneyland
-	('Tokyo Skytree', 'A torre mais alta de Tóquio (450 andares)', 105.00, 'Atração','Lugar', NULL), -- Tokyo Skytree
-	('Tokyo Tower', 'A torre mais alta de Tóquio (250 m)', 105.00, 'Atração','Lugar', NULL), -- Tokyo Skytree
-	('Tokyo teamLab - Tokyo', 'Museu de imersão com imagens um conjunto de artistas', 130.00, 'Atração','Lugar', NULL), -- Tokyo teamLab
-	('Universal Studios - Osaka', 'A Universal do Japão, um parque temático fantástico com atrações como o castelo do Harry Potter e outros filmes', 830.00, 'Atração','Lugar', NULL), -- Osaka Universal
 
-	('Passagem de avião', 'Passagem de ida', 6500.00, 'Avião','Transporte', NULL), -- Passagem avião
-	('Passagem de avião',  'Passagem de volta', 6500.00, 'Avião','Transporte', NULL),-- Passagem avião
-	('JR Rail Pass - 7 DIAS', 'COMUM', 1969.37, 'Trem-bala', 'Transporte', NULL), -- JR rail pass
-	('JR Rail Pass - 14 DIAS', 'COMUM', 3151.00, 'Trem-bala', 'Transporte', NULL), -- JR rail pass
-	('JR Rail Pass - 21 DIAS', 'COMUM', 3938.75, 'Trem-bala', 'Transporte', NULL), -- JR rail pass
-	('Bilhete Metrô/Ônibus',  'Valor gasto em bilhetes por dia', 50.00, 'Metrô/Ônibus','Transporte' , NULL), -- Bilhete metrô/ônibus
+-- LOCAIS
+	('Tokyo (Tóquio)', 'Cidade de Tóquio, capital do Japão, une o tradicional ao moderno, a cidade mais tecnológica do Japão, tem vários bairros famosos como Shibuya, Shinjuku, Ginza, Akihabara, Harajuku e Odaiba', 0, 'Cidade','Lugar', '<img src="../assets/imgs/tokyo_city.jpg" alt="">'), -- Tokyo
+	('Yokohama', 'Cidade de Yokohama, importante centro de comércio internacional, moderna e onde muitos filmes e doramas são gravados', 0, 'Cidade','Lugar', '<img src="../assets/imgs/yokohama.jpg" alt="">'), -- Tokyo
+	('Kyoto (Quioto)', 'Cidade de Quioto, antiga capital do Japão tem muitos templos e bairros antigos e você pode experimentar muito da cultura tradicional japonesa, comer doces típicos e ver gueixas, ninjas e samurais', 0, 'Cidade','Lugar', '<img src="../assets/imgs/kyoto.jpg" alt="">'), -- Kyoto
+	('Osaka', 'Cidade de Osaka, uma das grandes cidades do Japão, tem aeroporto internacional, outlets, e é lá que fica a Universal Studios', 0, 'Cidade','Lugar', '<img src="../assets/imgs/osaka2.jpg" alt="">'), -- Osaka
+	('Hiroshima', 'Cidade de Hiroshima, cidade onde caiu uma das bombas nucleares, é possível ver um pouco da história em locais preservados, aprender no museu e presenciar o resultado da restauração da destruição. Ela existe como um símbolo da paz, para nos lembrar dos estragos que ataques nucleares podem causar', 0, 'Cidade','Lugar', '<img src="../assets/imgs/hiroshima.jpg" alt="">'), -- Hiroshima
+	('Fukuoka', 'Cidade de Fukuoka, cidade com praias, templos e shopping modernos', 0, 'Cidade','Lugar', '<img src="../assets/imgs/fukuoka_shopping.jpg" alt="">'), -- Fukuoka
+	('Sapporo', 'Cidade de Sapporo, conhecida pela gastronomia e pelo famoso festival da neve, onde enormes esculturas de neve e gelo são expostas no início do ano', 0, 'Cidade','Lugar', '<img src="../assets/imgs/sapporo-snow-festival-1536.jpg" alt="">'), -- Sapporo
+	('Okinawa', 'Região de praias de areia branca e águas cristalinas com grande variedade de corais e vida submarina.', 0, 'Região','Lugar', '<img src="../assets/imgs/Okinawa-beach-800x532-1.jpg" alt="">'), -- Okinawa
+	('Mt. Fuji', 'Monte Fuji, é possível escalar o monte Fuji nos meses de julho a setembro', 140.00, 'Região','Lugar', '<img src="../assets/imgs/Fuji_7.png" alt="">'), -- Mt Fuji
     
-    ('Pocket WiFi - 1 DIA', 'Roteador de bolso', 10.00, 'Internet','Comunicação', NULL), -- Pocket wifi
-    ('Pocket WiFi - 7 DIAS', 'Roteador de bolso', 69.00, 'Internet','Comunicação', NULL), -- Pocket wifi
-	('Pocket WiFi - 14 DIAS', 'Roteador de bolso', 98.00, 'Internet', 'Comunicação', NULL), -- Pocket wifi
-	('Pocket WiFi - 21 DIAS', 'Roteador de bolso', 127.00, 'Internet', 'Comunicação', NULL), -- Pocket wifi
+	('Tokyo Disneyland', 'A Disneyland do Japão, um parque temático fantástico do reino da fantasia', 270.00, 'Atração','Lugar', '<img src="../assets/imgs/disneyland_3.jpg" alt="">'), -- Tokyo Disneyland
+	('Tokyo Skytree', 'A torre mais alta de Tóquio (450 andares)', 105.00, 'Atração','Lugar', '<img src="../assets/imgs/tokyo_skytree.jpg" alt="">'), -- Tokyo Skytree
+	('Tokyo Tower', 'A torre mais alta de Tóquio (250 m)', 105.00, 'Atração','Lugar', '<img src="../assets/imgs/tokyo_tower_2.jpg" alt="">'), -- Tokyo Tower
+	('Tokyo teamLab - Tokyo', 'Museu de imersão com imagens um conjunto de artistas', 130.00, 'Atração','Lugar', '<img src="../assets/imgs/teamlabs_4.jpg" alt="">'), -- Tokyo teamLab
+	('Universal Studios - Osaka', 'A Universal do Japão, um parque temático fantástico com atrações como o castelo do Harry Potter e outros filmes', 830.00, 'Atração','Lugar', '<img src="../assets/imgs/universal_3.jpg" alt="">'), -- Osaka Universal
+	('Castelos', 'Castelos e jardins restaurados e preservados para visitação', 40.00, 'Atração','Lugar', '<img src="../assets/imgs/osaka_castle.jpg" alt="">'), -- Castelos
+	('Templos', 'Templos abertos para visitação', 20.00, 'Atração','Lugar', '<img src="../assets/imgs/templo_kin.jpg" alt="">'), -- Templos
+	('Karaoke', 'Karaokê box para poder cantar até fechar o estabelecimento às 6:00', 25.00, 'Atração','Lugar', '<img src="../assets/imgs/karaoke-shinjuku-japan.jpg" alt="">'), -- Karaoke
     
-	('Diária Hotel **', 'Quarto solteiro hotel comum', 300.00, 'Hotel','Hospedagem', NULL), -- Hotel
-	('Diária Hotel ***', 'Quarto solteiro hotel comum', 520.00, 'Hotel', 'Hospedagem', NULL), -- Hotel
-	('Diária Hotel ****', 'Quarto solteiro hotel comum', 600.00, 'Hotel', 'Hospedagem', NULL), -- Hotel
-	('Diária Hotel ****', 'Quarto solteiro hotel comum', 1800.00, 'Hotel', 'Hospedagem', NULL), -- Hotel
-	('Diária Ryokan **', 'Quarto solteiro hotel típico japonês', 420.00, 'Ryokan', 'Hospedagem', NULL), -- Ryokan
-	('Diária Ryokan ***', 'Quarto solteiro hotel típico japonês', 1050.00, 'Ryokan', 'Hospedagem', NULL), -- Ryokan
-	('Diária Ryokan ****', 'Quarto solteiro hotel típico japonês', 2100.00, 'Ryokan', 'Hospedagem', NULL), -- Ryokan
+
+	('Passagem de avião', 'Passagem de ida', 6500.00, 'Avião','Transporte', '<img src="../assets/imgs/airplane_ana.jpg" alt="">'), -- Passagem avião
+	('Passagem de avião',  'Passagem de volta', 6500.00, 'Avião','Transporte', '<img src="../assets/imgs/airplane_ana.jpg" alt="">'),-- Passagem avião
+	('JR Rail Pass - 7 DIAS', 'COMUM', 1969.37, 'Trem-bala', 'Transporte', '<img src="../assets/imgs/Shinkansen.jpg" alt="">'), -- JR rail pass
+	('JR Rail Pass - 14 DIAS', 'COMUM', 3151.00, 'Trem-bala', 'Transporte', '<img src="../assets/imgs/Shinkansen.jpg" alt="">'), -- JR rail pass
+	('JR Rail Pass - 21 DIAS', 'COMUM', 3938.75, 'Trem-bala', 'Transporte', '<img src="../assets/imgs/Shinkansen.jpg" alt="">'), -- JR rail pass
+	('Bilhete Metrô/Ônibus',  'Valor gasto em bilhetes por dia', 50.00, 'Metrô/Ônibus','Transporte' , '<img src="../assets/imgs/subway_ticket.jpg" alt="">'), -- Bilhete metrô/ônibus
+    
+    ('Pocket WiFi - 1 DIA', 'Roteador de bolso', 10.00, 'Internet','Comunicação', '<img src="../assets/imgs/pocket_wifi.jpg" alt="">'), -- Pocket wifi
+    ('Pocket WiFi - 7 DIAS', 'Roteador de bolso', 69.00, 'Internet','Comunicação', '<img src="../assets/imgs/pocket_wifi.jpg" alt="">'), -- Pocket wifi
+	('Pocket WiFi - 14 DIAS', 'Roteador de bolso', 98.00, 'Internet', 'Comunicação', '<img src="../assets/imgs/pocket_wifi.jpg" alt="">'), -- Pocket wifi
+	('Pocket WiFi - 21 DIAS', 'Roteador de bolso', 127.00, 'Internet', 'Comunicação', '<img src="../assets/imgs/pocket_wifi.jpg" alt="">'), -- Pocket wifi
+    
+	('Diária Capsula **', 'Capsula', 100.00, 'Capsula','Hospedagem', '<img src="../assets/imgs/hotel_capsule.jpg" alt="">'), -- Hotel
+	('Diária Hotel ***', 'Quarto solteiro hotel comum', 520.00, 'Hotel', 'Hospedagem', '<img src="../assets/imgs/hotel_apa.jpg" alt="">'), -- Hotel
+	('Diária Hotel ****', 'Quarto solteiro hotel comum', 600.00, 'Hotel', 'Hospedagem', '<img src="../assets/imgs/hotel_modern.jpg" alt="">'), -- Hotel
+	('Diária Hotel ****', 'Quarto solteiro hotel comum', 1800.00, 'Hotel', 'Hospedagem', '<img src="../assets/imgs/hotel_modern_2.jpg" alt="">'), -- Hotel
+	('Diária Ryokan **', 'Quarto solteiro hotel típico japonês', 420.00, 'Ryokan', 'Hospedagem', '<img src="../assets/imgs/ryokan_2.jpg" alt="">'), -- Ryokan
+	('Diária Ryokan ***', 'Quarto solteiro hotel típico japonês', 1050.00, 'Ryokan', 'Hospedagem', '<img src="../assets/imgs/ryokan_1.jpg" alt="">'), -- Ryokan
+	('Diária Ryokan ****', 'Quarto solteiro hotel típico japonês', 2100.00, 'Ryokan', 'Hospedagem', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Ryokan
 	 
-	('Drink Bar (Softdrink)', 'Rodízio de bebida não-alcóolica', 21, 'Bebida', 'Alimentação', NULL), -- Bebibas
-	('Drink Bar (Bebida alcoolica)', 'Rodízio de bebida alcóolica', 21, 'Bebida', 'Alimentação', NULL), -- Bebibas
-	('Café', 'Caneca', 21, 'Bebida', 'Alimentação', NULL), -- Bebibas
-	('Refrigerante', 'Lata', 6, 'Bebida', 'Alimentação', NULL), -- Bebibas
-	('Cerveja', 'lata', 12, 'Bebida', 'Alimentação', NULL), -- Bebibas
-	('Suco fresco', 'Copo', 28, 'Bebida', 'Alimentação', NULL), -- Bebibas
-	('Suco garrafa', 'Suco em garrafa de 300 - 500ml', 6.00, 'Bebida', 'Alimentação', NULL), -- Bebibas
-	('Bebida de garrafa', 'Suco em garrafa de 300 - 500ml', 5.00, 'Bebida', 'Alimentação', NULL), -- Bebibas
+	('Drink Bar (Softdrink)', 'Rodízio de bebida não-alcóolica', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
+	('Drink Bar (Bebida alcoolica)', 'Rodízio de bebida alcóolica', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
+	('Café', 'Caneca', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
+	('Refrigerante', 'Lata', 6, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
+	('Cerveja', 'lata', 12, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
+	('Suco fresco', 'Copo', 28, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
+	('Bebida de lata', 'Suco em lata', 5.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
+	('Bebida de garrafa', 'Suco em garrafa de 300 - 500ml', 7.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
     
-	('Taiyaki', 'Bolinho frito em formato de peixe com recheio (creme/doce de feijão)', 10, 'Doces', 'Alimentação', NULL), -- Doces
-	('Mochi', 'Bolinho feito com farinha de arroz recheado com doce de feijão', 10, 'Doces', 'Alimentação', NULL), -- Doces
-	('Daifuku', 'Bolinho feito com farinha de arroz recheado com doce de feijão e morango', 10, 'Doces', 'Alimentação', NULL), -- Doces
-	('Parfait japonês', 'Taça de sorvete com frutas, chantilly e cereal,', 40, 'Doces', 'Alimentação', NULL), -- Doces
-	('Dango', 'Bolinho feito com farinha de arroz e molho doce de shoyu', 10, 'Doces', 'Alimentação', NULL), -- Doces
-	('Cheesecake japonês', 'Cheesecake tradicional', 30, 'Doces', 'Alimentação', NULL), -- Doces
-	('Sorvete', 'Bola de sorvete', 21, 'Doces', 'Alimentação', NULL), -- Doces
-	('Crepe', 'Crepe doce com recheio de chantilly, frutas e caldas', 21, 'Doces', 'Alimentação', NULL), -- Doces
-	('Confeitarias especiais', 'Doces tradicionais japoneses', 40, 'Doces', 'Alimentação', NULL), -- Doces
+	('Taiyaki', 'Bolinho frito em formato de peixe com recheio (creme/doce de feijão)', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/taiyaki.jpg" alt="">'), -- Doces
+	('Mochi', 'Bolinho feito com farinha de arroz recheado com doce de feijão', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/mochi_2.jpg" alt="">'), -- Doces
+	('Daifuku', 'Bolinho feito com farinha de arroz recheado com doce de feijão e morango', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/daifuku_2.jpg" alt="">'), -- Doces
+	('Parfait japonês', 'Taça de sorvete com frutas, chantilly e cereal,', 40, 'Doces', 'Alimentação', '<img src="../assets/imgs/parfait_2.jpg" alt="">'), -- Doces
+	('Dango', 'Bolinho feito com farinha de arroz e molho doce de shoyu', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/dango.jpg" alt="">'), -- Doces
+	('Cheesecake japonês', 'Cheesecake tradicional', 30, 'Doces', 'Alimentação', '<img src="../assets/imgs/cheesecake.jpg" alt="">'), -- Doces
+	('Sorvete', 'Bola de sorvete', 21, 'Doces', 'Alimentação', '<img src="../assets/imgs/chinese_food.jpg" alt="">'), -- Doces
+	('Crepe', 'Crepe doce com recheio de chantilly, frutas e caldas', 21, 'Doces', 'Alimentação', '<img src="../assets/imgs/crepe_4.jpg" alt="">'), -- Doces
+	('Confeitarias especiais', 'Doces tradicionais japoneses', 40, 'Doces', 'Alimentação', '<img src="../assets/imgs/wahashi.jpg" alt="">'), -- Doces
     
-	('Café da manhã simples', 'Sanduíche e café', 25, 'Café da manhã', 'Alimentação', NULL), -- Café da manhã
-	('Café da manhã ocidental',  'Ovos, torradas e bebida', 40, 'Café da manhã', 'Alimentação', NULL), -- Café da manhã
-	('Café da manhã em hotel',  'Buffet à vontade', 100, 'Café da manhã', 'Alimentação', NULL), -- Café da manhã
+	('Café da manhã simples', 'Sanduíche e café', 25, 'Café da manhã', 'Alimentação', '<img src="../assets/imgs/breakfast_ocidental.jpg" alt="">'), -- Café da manhã
+	('Café da manhã ocidental',  'Ovos, torradas e bebida', 40, 'Café da manhã', 'Alimentação', '<img src="../assets/imgs/breakfast_ocidental_2.jpg" alt="">'), -- Café da manhã
+	('Café da manhã em hotel',  'Buffet à vontade', 100, 'Café da manhã', 'Alimentação', '<img src="../assets/imgs/breakfast_oriental_2.jpg" alt="">'), -- Café da manhã
     
-	('Comida chinesa', 'Lamen chinês, arroz frito, gyoza', 52, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Comida italiana', 'Massa ou pizza individual', 70, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Tabehoudai',  'Rodízio com limite de 90minutos', 125, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Teishoku', 'Refeição completa tradicional: Arroz + sopa + prato principal + acompanhamentos', 70, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Sukiyaki', 'Carne cozida na mesa com macarrão, cogumelos, broto de feijão', 122, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Shabu-shabu', 'Carne fina para hotpot cozida na mesa com macarrão, cogumelos, broto de feijão', 122, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Lámen (Ramen)', 'Macarrão com caldo (à base de frango, porco, shoyu, sal, missô)', 42, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Soba', 'Macarrão de trigo sarraceno com caldo à base de shoyu e hondashi', 22, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Udon', 'Macarrão grosso tradicional com caldo à base de shoyu e hondashi', 42, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Sushi Tradicional', 'Combo de 8–12 peças', 70, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Sushi de esteira (kaiten sushi)', '1 prato de 2 peças', 12, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Curry japonês', 'Curry estilo japonês com batatas, cenouras e algum tipo de proteína', 35, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Donburi', 'Tigela com arroz e carne/porco', 28, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('fast-food',  'Combo: hambúrguer + batata + bebida', 42, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Bento', 'Marmita pronta', 32, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Okonomiyaki', 'Panqueca japonesa', 52, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Tempurá',  'Camarão e legumes empanados', 70, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Tonkatsu', 'Carne de porco empanada', 52, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Gyukatsu', 'Contra-filé empanado', 52, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Okonomiyaki', 'Panqueca japonesa', 52, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Wagyu', 'Carne premium', 350, 'Refeição', 'Alimentação', NULL), -- Refeição
-	('Takoyaki', 'Bolinho com recheio de polvo', 28, 'Refeição', 'Alimentação', NULL), -- Refeição
-    ('Yakitori',  'Espetinho de frango', 7, 'Refeição', 'Alimentação', NULL); -- Refeição
+	('Comida chinesa', 'Lamen chinês, arroz frito, gyoza', 52, 'Refeição', 'Alimentação', '<img src="../assets/imgs/chinese_food.jpg" alt="">'), -- Refeição
+	('Comida italiana', 'Massa ou pizza individual', 70, 'Refeição', 'Alimentação', '<img src="../assets/imgs/italian_food.jpg" alt="">'), -- Refeição
+	('Tabehoudai',  'Rodízio com limite de 90minutos', 125, 'Refeição', 'Alimentação', '<img src="../assets/imgs/tabehoudai_food.jpg" alt="">'), -- Refeição
+	('Teishoku', 'Refeição completa tradicional: Arroz + sopa + prato principal + acompanhamentos', 70, 'Refeição', 'Alimentação', '<img src="../assets/imgs/teishoku_food_2.jpg" alt="">'), -- Refeição
+	('Sukiyaki', 'Carne cozida na mesa com macarrão, cogumelos, broto de feijão', 122, 'Refeição', 'Alimentação', '<img src="../assets/imgs/sukiyaki_food.jpg" alt="">'), -- Refeição
+	('Shabu-shabu', 'Carne fina para hotpot cozida na mesa com macarrão, cogumelos, broto de feijão', 122, 'Refeição', 'Alimentação', '<img src="../assets/imgs/shabushabu_food.jpg" alt="">'), -- Refeição
+	('Lámen (Ramen)', 'Macarrão com caldo (à base de frango, porco, shoyu, sal, missô)', 42, 'Refeição', 'Alimentação', '<img src="../assets/imgs/ramen_food.jpg" alt="">'), -- Refeição
+	('Soba', 'Macarrão de trigo sarraceno com caldo à base de shoyu e hondashi', 22, 'Refeição', 'Alimentação', '<img src="../assets/imgs/soba_food.jpg" alt="">'), -- Refeição
+	('Udon', 'Macarrão grosso tradicional com caldo à base de shoyu e hondashi', 42, 'Refeição', 'Alimentação', '<img src="../assets/imgs/udon_food.jpg" alt="">'), -- Refeição
+	('Sushi Tradicional', 'Combo de 8–12 peças', 70, 'Refeição', 'Alimentação', '<img src="../assets/imgs/sushi_food_2.jpg" alt="">'), -- Refeição
+	('Sushi de esteira (kaiten sushi)', '1 prato de 2 peças', 12, 'Refeição', 'Alimentação', '<img src="../assets/imgs/sushi_esteira_food.jpg" alt="">'), -- Refeição
+	('Curry japonês', 'Curry estilo japonês com batatas, cenouras e algum tipo de proteína', 35, 'Refeição', 'Alimentação', '<img src="../assets/imgs/curry_food.jpg" alt="">'), -- Refeição 
+	('Donburi', 'Tigela com arroz e carne/porco', 28, 'Refeição', 'Alimentação', '<img src="../assets/imgs/donburi_food.jpg" alt="">'), -- Refeição
+	('fast-food',  'Combo: hambúrguer + batata + bebida', 42, 'Refeição', 'Alimentação', '<img src="../assets/imgs/fast_food.jpg" alt="">'), -- Refeição
+	('Bento', 'Marmita pronta', 32, 'Refeição', 'Alimentação', '<img src="../assets/imgs/bento_food.jpg" alt="">'), -- Refeição
+	('Okonomiyaki', 'Panqueca japonesa', 52, 'Refeição', 'Alimentação', '<img src="../assets/imgs/okonomiyaki_food.jpg" alt="">'), -- Refeição
+	('Tempurá',  'Camarão e legumes empanados', 70, 'Refeição', 'Alimentação', '<img src="../assets/imgs/tempura_food.jpg" alt="">'), -- Refeição
+	('Tonkatsu', 'Carne de porco empanada', 52, 'Refeição', 'Alimentação', '<img src="../assets/imgs/tonkatsu_food.jpg" alt="">'), -- Refeição
+	('Gyukatsu', 'Contra-filé empanado', 52, 'Refeição', 'Alimentação', '<img src="../assets/imgs/gyukatsu_food.jpg" alt="">'), -- Refeição
+	('Okonomiyaki', 'Panqueca japonesa', 52, 'Refeição', 'Alimentação', '<img src="../assets/imgs/okonomiyaki_food.jpg" alt="">'), -- Refeição
+	('Wagyu', 'Carne premium', 350, 'Refeição', 'Alimentação', '<img src="../assets/imgs/wagyu_food_2.jpg" alt="">'), -- Refeição
+	('Takoyaki', 'Bolinho com recheio de polvo', 28, 'Refeição', 'Alimentação', '<img src="../assets/imgs/takoyaki_japan.jpg" alt="">'), -- Refeição
+    ('Yakitori',  'Espetinho de frango', 7, 'Refeição', 'Alimentação', '<img src="../assets/imgs/yakitori_japan.jpg" alt="">'); -- Refeição
     
     
 SELECT * FROM item;

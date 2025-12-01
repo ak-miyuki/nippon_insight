@@ -22,7 +22,7 @@
 
 
     <!--FONT AWESOME-->
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script> -->
 </head>
 
 <!-- <body onload=" atualizarFeed()"> -->
@@ -104,38 +104,11 @@
         </div>
 
         <div class="opcoes" id="div_escolhas">
-            <div id="div_categoria">
-                <div class="categoria" id="div_tipo">
-                    <!-- <h1>${listaItens.categoria}</h1> -->
-                </div>
-                <div class="conteudo_info">
-                    <div class="foto">
-                        <!-- <span id="span_foto">${listaItens.foto}</span> -->
-                    </div>
-                    <div id="div_info" class="info">
-                        <div id="div_nome">
-                            <h3>
-                                <!-- <span id="span_nome">${listaItens.nome}</span> -->
-                            </h3>
-                        </div>
-                        <div id="div_descricao">
-                            <h3>Descrição:</h3>
-                            <!-- <span id="span_descricao">${listaItens.descricao}</span> -->
-                        </div>
-                    </div>
-                    <div class="input_qtd">
-                        <h3>Preço unitário:</h3>
-                        <!-- <span id="span_preco">${listaItens.preco}</span> -->
-                        <h3>Quantidade:</h3>
-                        <input type="text" id="input_preco${listaItens.idItem}">
-                    </div>
-                </div>
-                <div class="buttons">
-                    <button class="botao" id="button_anterior">ANTERIOR</button>
-                    <button class="botao" id="button_proximo">PRÓXIMO</button>
-                    <button class="botao" onclick="confirmar()">CONFIRMAR</button>
-                </div>
-            </div>
+            <div id="div_lugar"></div>
+            <div id="div_transporte"></div>
+            <div id="div_comunicacao"></div>
+            <div id="div_hospedagem"></div>
+            <div id="div_alimentacao"></div>
         </div>
     </div>
 
@@ -147,11 +120,12 @@
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     var idViagem = sessionStorage.VIAGEM;
+    var lista_tudo = [];
+    var indexAtual = 0;
 
     var listaCategorias = ['Lugar', 'Transporte', 'Comunicação', 'Hospedagem', 'Alimentação'];
 
     function atualizarPagina() {
-
 
         fetch(`/itens/buscarItens`)
             .then(response => response.json())
@@ -162,64 +136,157 @@
                 } else {
 
                     console.log(listaItens);
+                    lista_tudo = listaItens;
 
-
-                    // var conteudo = "";
-
-                    // for (var i = 0; i < listaCategorias.length; i++) {
-
-                    //     conteudo = `
-                    //         <div id="div_categoria">
-                    //             <div class="categoria" id="div_tipo">
-                    //                 <h1>${listaCategorias[i]}</h1>
-                    //             </div>
-                    //         <br>
-                    //         `
-
-                    //     for (var j = 0; j < listaItens.length; j++) {
-
-                    //         if (listaCategorias[i] == listaItens[j].categoria) {
-
-                    //             conteudo += `
-                    //             <div class="conteudo_info">
-                    //                 <div class="foto">
-                    //                     <span id="span_foto">${listaItens[j].foto}</span>
-                    //                 </div>
-                    //                 <div id="div_info" class="info">
-                    //                     <div id="div_nome">
-                    //                         <h3>
-                    //                             <span id="span_nome">${listaItens[j].nome}</span>
-                    //                         </h3>
-                    //                         </div>
-                    //                     <div id="div_descricao">
-                    //                         <h3>Descrição:</h3>
-                    //                             <span id="span_descricao">${listaItens[j].descricao}</span>
-                    //                     </div>
-                    //                     </div>
-                    //                     <div class="input_qtd">
-                    //                         <h3>Preço unitário:</h3>
-                    //                             <span id="span_preco">${listaItens[j].preco}</span>
-                    //                         <h3>Quantidade:</h3>
-                    //                         <input type="text" id="input_preco${listaItens[j].idItem}">
-                    //                         </div>
-                    //                     </div>
-                    //                     <div class="buttons">
-                                                
-                    //                         <button class="botao" id="button_proximo">PRÓXIMO</button>
-                    //                     </div>
-                    //                 </div>
-                    //                                             `
-                    //         }
-                    //     }
-                    // }
+                    mostrarItensPorCategoria();
                 }
-            
-
             })
-            .catch (error => console.error('Erro ao buscar dados dos itens:', error));
+            .catch(error => console.error('Erro ao buscar dados dos itens:', error));
 
-    // div_escolhas.innerHTML = conteudo;
+
     }
+
+    function atualizarDisplay() {
+
+        div_lugar.style.display = 'none';
+        div_transporte.style.display = 'none';
+        div_comunicacao.style.display = 'none';
+        div_hospedagem.style.display = 'none';
+        div_alimentacao.style.display = 'none';
+
+        var categoria = listaCategorias[indexAtual];
+
+        if (categoria == 'Lugar') div_lugar.style.display = 'block';
+        else if (categoria == 'Transporte') div_transporte.style.display = 'block';
+        else if (categoria == 'Comunicação') div_comunicacao.style.display = 'block';
+        else if (categoria == 'Hospedagem') div_hospedagem.style.display = 'block';
+        else div_alimentacao.style.display = 'block';
+    }
+
+    function mostrarItensPorCategoria() {
+
+        for (var k = 0; k < listaCategorias.length; k++) {
+
+            var categoriaAtual = listaCategorias[k];
+            var itensFiltrados = [];
+            var conteudo = "";
+
+            for (var i = 0; i < lista_tudo.length; i++) {
+                if (lista_tudo[i].categoria == categoriaAtual) {
+                    itensFiltrados[itensFiltrados.length] = lista_tudo[i];
+                }
+            }
+
+            conteudo = `
+            <div id="div_categoria">
+                <div class="categoria" id="div_tipo">
+                    <h1>${categoriaAtual}</h1>
+                </div>
+            <br>
+        `
+
+            for (var j = 0; j < itensFiltrados.length; j++) {
+
+                var item = itensFiltrados[j];
+
+                conteudo += `
+                   <div class="conteudo_info">
+                       <div class="foto">
+                           <span id="span_foto">${item.foto}</span>
+                       </div>
+
+                       <div id="div_info" class="info">
+                           <div id="div_nome" class="item_nome">
+                               <h2>
+                                   <span  id="span_nome">${item.nomeItem}</span>
+                               </h2>
+                               </div>
+
+                           <div id="div_descricao">
+                               <h3>Descrição:</h3>
+                               <br>
+                                   <span id="span_descricao">${item.descricao}</span>
+                           </div>
+                        </div>
+
+                           <div class="input_qtd">
+                               <h3>Preço unitário:</h3>
+                                   <span id="span_preco">${Number(item.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                               <h3>Quantidade:</h3>
+                               <input type="number" id="input_qtd${item.idItem}" placeholder="Ex: 1">
+                            </div>
+                        </div> 
+                    `;
+            }
+
+            if (k == indexAtual) {
+
+                if (k == 0) {
+                    conteudo += `
+                <div class="buttons">
+                    <button class="botao" id="button_proximo" onclick="proximo()">PRÓXIMO</button>
+                </div>
+            </div>
+            `;
+
+                } else if (k == listaCategorias.length - 1) {
+                    conteudo += `
+            <div class="buttons">
+                <button class="botao" id="button_anterior" onclick="anterior()">ANTERIOR</button>
+                <button class="botao" onclick="confirmar()">CONFIRMAR</button>
+                </div>
+
+            </div>
+            `;
+                } else {
+                    conteudo += `
+            <div class="buttons">
+                <button class="botao" id="button_anterior" onclick="anterior()">ANTERIOR</button>
+                <button class="botao" id="button_proximo" onclick="proximo()">PRÓXIMO</button>
+            </div>
+
+            </div>
+            `;
+                }
+            }
+
+            if (categoriaAtual == 'Lugar') {
+                div_lugar.innerHTML = conteudo;
+
+            } else if (categoriaAtual == 'Transporte') {
+                div_transporte.innerHTML = conteudo;
+
+            } else if (categoriaAtual == 'Comunicação') {
+                div_comunicacao.innerHTML = conteudo;
+
+            } else if (categoriaAtual == 'Hospedagem') {
+                div_hospedagem.innerHTML = conteudo;
+
+            } else {
+                div_alimentacao.innerHTML = conteudo;
+            }
+        }
+        atualizarDisplay()
+    }
+
+    function proximo() {
+        indexAtual++;
+        if (indexAtual >= listaCategorias.length) {
+            indexAtual = listaCategorias.length - 1;
+        }
+        mostrarItensPorCategoria();
+    }
+
+    function anterior() {
+        indexAtual--;
+        if (indexAtual < 0) {
+            indexAtual = 0;
+        }
+        mostrarItensPorCategoria();
+    }
+
+
+
 
 
 </script>
