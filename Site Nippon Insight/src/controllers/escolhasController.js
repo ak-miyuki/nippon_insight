@@ -16,6 +16,7 @@ function buscarVotosLugares(req, res) {
   });
 }
 
+
 function buscarEscolhasPorViagem(req, res) {
   var idViagem = req.params.idViagem;
 
@@ -32,41 +33,138 @@ function buscarEscolhasPorViagem(req, res) {
   });
 }
 
-function cadastrar(req, res) {
+
+function salvar(req, res) {
+
+console.log("BODY RECEBIDO:", req.body);
+
   var fkViagem = req.body.fkViagemServer;
   var fkItem = req.body.fkItemServer;
   var qtd = req.body.qtdServer;
 
+  
 
-  if (fkViagem == undefined) {
-    res.status(400).send("idViagem está undefined!");
-  }
+  escolhasModel.buscarEscolhaEspecifica(fkViagem, fkItem)
+    .then(resultado => {
 
-  if (fkItem == undefined) {
-    res.status(400).send("idItem está undefined!");
-  }
-  if (qtd == undefined) {
-    res.status(400).send("qtd está undefined!");
-  }
+      if (resultado.length > 0) {
 
+        return escolhasModel.atualizarEscolhas(fkViagem, fkItem, qtd)
+          .then(() => {
+            res.status(200).json({
+              method: "PUT",
+              headers: "Quantidade atualizada com sucesso"
+            });
+          });
 
-  escolhasModel.cadastrar(fkViagem, fkItem, qtd)
-    .then((resultado) => {
-      res.status(201).json(resultado);
-    }
-    ).catch((erro) => {
+      } else {
+
+        return escolhasModel.cadastrar(fkViagem, fkItem, qtd)
+          .then(() => {
+            res.status(201).json({
+              method: "POST",
+              headers: "Item inserido com sucesso"
+            });
+          });
+      }
+
+    })
+    .catch(function (erro) {
       console.log(erro);
-      console.log(
-        "\nHouve um erro ao realizar o cadastro! Erro: ",
-        erro.sqlMessage
-      );
+      console.log("Erro ao salvar:", erro.sqlMessage);
       res.status(500).json(erro.sqlMessage);
     });
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function cadastrar(req, res) {
+//   var fkViagem = req.body.fkViagemServer;
+//   var fkItem = req.body.fkItemServer;
+//   var qtd = req.body.qtdServer;
+
+
+//   if (fkViagem == undefined) {
+//     res.status(400).send("idViagem está undefined!");
+//   }
+
+//   if (fkItem == undefined) {
+//     res.status(400).send("idItem está undefined!");
+//   }
+//   if (qtd == undefined) {
+//     res.status(400).send("qtd está undefined!");
+//   }
+
+
+//   escolhasModel.cadastrar(fkViagem, fkItem, qtd)
+//     .then((resultado) => {
+//       res.status(201).json(resultado);
+//     }
+//     ).catch((erro) => {
+//       console.log(erro);
+//       console.log(
+//         "\nHouve um erro ao realizar o cadastro! Erro: ",
+//         erro.sqlMessage
+//       );
+//       res.status(500).json(erro.sqlMessage);
+//     });
+// }
+
+
+// function atualizarEscolhas(req, res) {
+//   var fkViagem = req.body.fkViagemServer;
+//   var fkItem = req.body.fkItemServer;
+//   var qtd = req.body.qtdServer;
+
+
+//   if (fkViagem == undefined) {
+//     res.status(400).send("idViagem está undefined!");
+//   }
+
+//   if (fkItem == undefined) {
+//     res.status(400).send("idItem está undefined!");
+//   }
+//   if (qtd == undefined) {
+//     res.status(400).send("qtd está undefined!");
+//   }
+
+
+//   escolhasModel.atualizarEscolhas(fkViagem, fkItem, qtd)
+//     .then((resultado) => {
+//       res.status(201).json(resultado);
+//     }
+//     ).catch((erro) => {
+//       console.log(erro);
+//       console.log(
+//         "\nHouve um erro ao realizar o cadastro! Erro: ",
+//         erro.sqlMessage
+//       );
+//       res.status(500).json(erro.sqlMessage);
+//     });
+// }
+
+
 module.exports = {
   buscarVotosLugares,
   buscarEscolhasPorViagem,
-  cadastrar
+  salvar,
+  // cadastrar,
+  // atualizarEscolhas
 }

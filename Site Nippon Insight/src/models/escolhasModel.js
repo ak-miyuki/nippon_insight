@@ -8,7 +8,6 @@ function buscarVotosLugares() {
   return database.executar(instrucaoSql);
 }
 
-var database = require("../database/config");
 
 function buscarEscolhasPorViagem(idViagem) {
 
@@ -18,9 +17,28 @@ function buscarEscolhasPorViagem(idViagem) {
   return database.executar(instrucaoSql);
 }
 
+
+function buscarEscolhaEspecifica(fkViagem, fkItem) {
+
+  var instrucaoSql = `SELECT * FROM escolha WHERE fkViagem = ${fkViagem} AND fkItem = ${fkItem};`;
+
+  console.log("Executando SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
 function cadastrar(fkViagem, fkItem, qtd) {
 
-  var instrucaoSql = `INSERT INTO escolha (fkViagem, fkItem, qtd) VALUES (${fkViagem}, '${fkItem}', '${qtd}')`;
+  var instrucaoSql = `INSERT INTO escolha (fkViagem, fkItem, qtd) VALUES (${fkViagem}, ${fkItem}, ${qtd})`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+
+function atualizarEscolhas(fkViagem, fkItem, qtd) {
+
+  var instrucaoSql = `UPDATE escolha SET qtd = ${qtd} WHERE fkViagem = ${fkViagem} AND fkItem = ${fkItem};`
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -30,5 +48,7 @@ function cadastrar(fkViagem, fkItem, qtd) {
 module.exports = {
   buscarVotosLugares,
   buscarEscolhasPorViagem,
-  cadastrar
+  buscarEscolhaEspecifica,
+  cadastrar,
+  atualizarEscolhas
 }

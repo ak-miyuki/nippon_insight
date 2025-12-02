@@ -23,7 +23,6 @@ function buscarViagemPorUsuario(req, res) {
 function cadastrar_idViagem(req, res) {
   var fkUsuario = req.body.fkUsuarioServer;
 
-
   if (fkUsuario == undefined) {
     res.status(400).send("idUsuario está undefined!");
   }

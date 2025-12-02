@@ -109,6 +109,11 @@
             <div id="div_comunicacao"></div>
             <div id="div_hospedagem"></div>
             <div id="div_alimentacao"></div>
+            <div class="buttons" id="navegacao_botoes">
+                <button id="button_anterior" class="botao" onclick="anterior()">ANTERIOR</button>
+                <button id="button_proximo" class="botao" onclick="proximo()">PRÓXIMO</button>
+                <button id="button_salvar" class="botao" onclick="salvar()">SALVAR</button>
+            </div>
         </div>
     </div>
 
@@ -119,7 +124,7 @@
 
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    var idViagem = sessionStorage.VIAGEM;
+    var idViagem = sessionStorage.ID_VIAGEM;
     var lista_tudo = [];
     var indexAtual = 0;
 
@@ -219,37 +224,6 @@
                     `;
             }
 
-            if (k == indexAtual) {
-
-                if (k == 0) {
-                    conteudo += `
-                <div class="buttons">
-                    <button class="botao" id="button_proximo" onclick="proximo()">PRÓXIMO</button>
-                </div>
-            </div>
-            `;
-
-                } else if (k == listaCategorias.length - 1) {
-                    conteudo += `
-            <div class="buttons">
-                <button class="botao" id="button_anterior" onclick="anterior()">ANTERIOR</button>
-                <button class="botao" onclick="confirmar()">CONFIRMAR</button>
-                </div>
-
-            </div>
-            `;
-                } else {
-                    conteudo += `
-            <div class="buttons">
-                <button class="botao" id="button_anterior" onclick="anterior()">ANTERIOR</button>
-                <button class="botao" id="button_proximo" onclick="proximo()">PRÓXIMO</button>
-            </div>
-
-            </div>
-            `;
-                }
-            }
-
             if (categoriaAtual == 'Lugar') {
                 div_lugar.innerHTML = conteudo;
 
@@ -266,8 +240,31 @@
                 div_alimentacao.innerHTML = conteudo;
             }
         }
-        atualizarDisplay()
+
+        atualizarDisplay();
+        atualizarBotoes();
     }
+
+
+    function atualizarBotoes() {
+
+        if (indexAtual == 0) {
+            button_anterior.style.display = 'none'
+            button_proximo.style.display = 'block'
+            button_salvar.style.display = 'none'
+
+        } else if (indexAtual == listaCategorias.length - 1) {
+            button_anterior.style.display = 'block'
+            button_proximo.style.display = 'none'
+            button_salvar.style.display = 'block'
+        } else {
+            button_anterior.style.display = 'block'
+            button_proximo.style.display = 'block'
+            button_salvar.style.display = 'none'
+        }
+
+    }
+
 
     function proximo() {
         indexAtual++;
@@ -276,6 +273,7 @@
         }
         mostrarItensPorCategoria();
     }
+
 
     function anterior() {
         indexAtual--;
@@ -286,7 +284,38 @@
     }
 
 
+    function salvar() {
+        
 
+        for (var i = 0; i < lista_tudo.length; i++) {
+
+            // var idViagem = JSON.parse(sessionStorage.ID_VIAGEM).idViagem;
+
+            var item = lista_tudo[i];
+            var idInput = "input_qtd" + item.idItem;
+
+            var input = document.getElementById(idInput);
+
+            var qtd = Number(input.value);
+
+            if (qtd > 0) {
+
+                fetch("/escolhas/salvar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        fkViagemServer: idViagem,
+                        fkItemServer: item.idItem,
+                        qtdServer: qtd
+                    })
+                })
+                    .then(res => res.json())
+                    .then(dados => console.log(dados))
+                    .catch(erro => console.log("Erro no fetch:", erro));
+            }
+        }
+
+    }
 
 
 </script>

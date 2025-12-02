@@ -363,5 +363,7 @@ select * from usuario;
 
 select * from viagem;
 
+select * from escolha;
+
 
 
