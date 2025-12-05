@@ -143,6 +143,7 @@
                     lista_tudo = listaItens;
 
                     mostrarItensPorCategoria();
+                    buscarItensEscolhidos()
                 }
             })
             .catch(error => console.error('Erro ao buscar dados dos itens:', error));
@@ -217,7 +218,7 @@
                                    <span id="span_preco">${Number(item.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                                <h3>Quantidade:</h3>
                                <input type="number" id="input_qtd${item.idItem}" placeholder="Ex: 1">
-                               <button id="button_salvar" class="botao" onclick="salvar()">SALVAR</button>
+                               <button id="button_salvar" class="botao" onclick="salvar(${item.idItem})">SALVAR</button>
                             </div>
                         </div> 
                     `;
@@ -280,32 +281,85 @@
     }
 
 
-    function salvar() {
-        
-        for (var i = 0; i < lista_tudo.length; i++) {
+    async function salvar(idItem) {
 
-            var item = lista_tudo[i];
-            var idInput = "input_qtd" + item.idItem;
-            var input = document.getElementById(idInput);
-            var qtd = Number(input.value);
 
-            if (qtd > 0) {
+        var inputQtd = document.getElementById(`input_qtd${idItem}`);
+        var qtd = Number(inputQtd.value);
 
-                fetch("/escolhas/salvar", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        fkViagemServer: idViagem,
-                        fkItemServer: item.idItem,
-                        qtdServer: qtd
-                    })
+        if (qtd >= 0) {
+
+            await fetch("/escolhas/salvar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    fkViagemServer: idViagem,
+                    fkItemServer: idItem,
+                    qtdServer: qtd
                 })
-                    .then(res => res.json())
-                    .then(dados => console.log(dados))
-                    .catch(erro => console.log("Erro no fetch:", erro));
+            })
+                .then(res => res.json())
+                .then(dados => console.log(dados))
+                .catch(erro => console.log("Erro no fetch:", erro));
+                
+                buscarItensEscolhidos();
+        }
+
+    }
+
+    function buscarItensEscolhidos() {
+
+        fetch(`/itens/buscarItensPorViagem/${idViagem}`)
+            .then(res => res.json())
+            .then(dados => {
+
+                lista_escolhas = dados;
+
+                preencherSpansEscolhas();
+            })
+            .catch(erro => console.log("Erro ao buscar itens escolhidos:", erro));
+    }
+
+    function preencherSpansEscolhas() {
+
+        var lugares = [];
+        var alimentacao = [];
+        var hospedagem = [];
+        var transporte = [];
+        var comunicacao = [];
+
+        for (var i = 0; i < lista_escolhas.length; i++) {
+            var item = lista_escolhas[i];
+
+            if (item.qtd > 0) {
+
+                if (item.categoria == "Lugar") lugares.push(item.nomeItem);
+                else if (item.categoria == "Alimentação") alimentacao.push(item.nomeItem);
+                else if (item.categoria == "Hospedagem") hospedagem.push(item.nomeItem);
+                else if (item.categoria == "Transporte") transporte.push(item.nomeItem);
+                else if (item.categoria == "Comunicação") comunicacao.push(item.nomeItem);
             }
         }
 
+        if (lugares.length > 0) {
+            span_lugares.innerHTML = lugares
+        } else span_lugares.innerHTML = "--//--";
+
+        if (alimentacao.length > 0) {
+            span_alimentacao.innerHTML = alimentacao
+        } else span_alimentacao.innerHTML = "--//--";
+
+        if (hospedagem.length > 0) {
+            span_hospedagem.innerHTML = hospedagem
+        } else span_hospedagem.innerHTML = "--//--";
+
+        if (transporte.length > 0) {
+            span_transporte.innerHTML = transporte
+        } else span_transporte.innerHTML = "--//--";
+
+        if (comunicacao.length > 0) {
+            span_comunicacao.innerHTML = comunicacao
+        } else span_comunicacao.innerHTML = "--//--";
     }
 
 

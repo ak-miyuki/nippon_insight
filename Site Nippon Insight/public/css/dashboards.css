@@ -331,6 +331,7 @@ body .janela {
   display: flex;
   flex-direction: column;
   padding: 0 5px 7px 5px;
+  flex-wrap:wrap;
 }
 
 .menu_block_ultimo {
@@ -338,6 +339,19 @@ body .janela {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  flex-wrap:wrap;
+}
+
+.menu_block span {
+  display: block;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+..menu_block_ultimo span {
+  display: block;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .header-left h3 {

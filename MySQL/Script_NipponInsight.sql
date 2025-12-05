@@ -98,14 +98,14 @@ INSERT INTO item (nomeItem, descricao, preco, tipo, categoria, foto) VALUES
 	('Diária Ryokan ***', 'Quarto solteiro hotel típico japonês', 1050.00, 'Ryokan', 'Hospedagem', '<img src="../assets/imgs/ryokan_1.jpg" alt="">'), -- Ryokan
 	('Diária Ryokan ****', 'Quarto solteiro hotel típico japonês', 2100.00, 'Ryokan', 'Hospedagem', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Ryokan
 	 
-	('Drink Bar (Softdrink)', 'Rodízio de bebida não-alcóolica', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
-	('Drink Bar (Bebida alcoolica)', 'Rodízio de bebida alcóolica', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
-	('Café', 'Caneca', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
-	('Refrigerante', 'Lata', 6, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
-	('Cerveja', 'lata', 12, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
-	('Suco fresco', 'Copo', 28, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
-	('Bebida de lata', 'Suco em lata', 5.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
-	('Bebida de garrafa', 'Suco em garrafa de 300 - 500ml', 7.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/ryokan_3.jpg" alt="">'), -- Bebibas
+	('Drink Bar (Softdrink)', 'Rodízio de bebida não-alcóolica', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/drink_bar_2.jpg" alt="">'), -- Bebibas
+	('Drink Bar (Bebida alcoolica)', 'Rodízio de bebida alcóolica', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/nomihoudai.jpg" alt="">'), -- Bebibas
+	('Café', 'Caneca', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/coffee_2.jpg" alt="">'), -- Bebibas
+	('Refrigerante', 'Lata', 6, 'Bebida', 'Alimentação', '<img src="../assets/imgs/refrigerante.jpg" alt="">'), -- Bebibas
+	('Cerveja', 'lata', 12, 'Bebida', 'Alimentação', '<img src="../assets/imgs/beer_2.jpg" alt="">'), -- Bebibas
+	('Suco fresco', 'Copo', 28, 'Bebida', 'Alimentação', '<img src="../assets/imgs/juice_2.jpg" alt="">'), -- Bebibas
+	('Bebida de lata', 'Suco em lata', 5.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/juice_3.jpg" alt="">'), -- Bebibas
+	('Bebida de garrafa', 'Suco em garrafa de 300 - 500ml', 7.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/juice_bottle.jpg" alt="">'), -- Bebibas
     
 	('Taiyaki', 'Bolinho frito em formato de peixe com recheio (creme/doce de feijão)', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/taiyaki.jpg" alt="">'), -- Doces
 	('Mochi', 'Bolinho feito com farinha de arroz recheado com doce de feijão', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/mochi_2.jpg" alt="">'), -- Doces
@@ -214,17 +214,16 @@ SELECT * FROM escolha; -- idEscolha, fkViagem, fkItem, qtd (AUTO_INCREMENT = 100
 CREATE OR REPLACE VIEW vw_itensUsuario AS
 	SELECT escolha.fkViagem,
 			item.*,
-			CASE WHEN ISNULL(escolha.qtd) THEN 0
-				ELSE escolha.qtd
-			END AS qtd
-		FROM item 
-        LEFT JOIN escolha 
-			ON item.idItem = escolha.fkItem;
+			escolha.qtd
+		FROM item
+        JOIN escolha 
+			ON item.idItem = escolha.fkItem
+				WHERE escolha.qtd > 0;
             
-SELECT * FROM vw_itensUsuario where fkViagem = 1000 OR ISNULL(fkViagem);
+SELECT * FROM vw_itensUsuario;
 
 /*
-`SELECT * FROM vw_itensUsuario where fkViagem = ${idViagem} OR ISNULL(fkViagem);`
+`SELECT * FROM vw_itensUsuario where fkViagem = ${idViagem};`
 */
 /* --------------------------------------- VIEW DA TABELA VIAGEM POR USUÁRIO: ---------------------------------------
 */
@@ -258,7 +257,7 @@ SELECT * FROM vw_dadosViagem;
 */
 select * from viagem;
 /*
---------------------------------------- VIEW DA TABELA USUÁRIO JOIN VEIAGEM: ---------------------------------------
+--------------------------------------- VIEW DA TABELA USUÁRIO JOIN VIAGEM: ---------------------------------------
 */
 CREATE OR REPLACE VIEW vw_dadosUsuario AS
 	SELECT idUsuario, 
