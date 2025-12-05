@@ -6,7 +6,7 @@
 */
 CREATE DATABASE nipponInsight;
 USE nipponInsight;
--- drop database nipponInsight;
+
 -- ---------------- TABELA usuario QUE RECEBE OS DADOS DO FORMULÁRIO DE CADASTRO -----------------
 CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -54,7 +54,6 @@ CREATE TABLE item (
     foto VARCHAR(200)
 ) AUTO_INCREMENT = 5000;
 
-
 INSERT INTO item (nomeItem, descricao, preco, tipo, categoria, foto) VALUES
 
 -- LOCAIS
@@ -100,12 +99,12 @@ INSERT INTO item (nomeItem, descricao, preco, tipo, categoria, foto) VALUES
 	 
 	('Drink Bar (Softdrink)', 'Rodízio de bebida não-alcóolica', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/drink_bar_2.jpg" alt="">'), -- Bebibas
 	('Drink Bar (Bebida alcoolica)', 'Rodízio de bebida alcóolica', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/nomihoudai.jpg" alt="">'), -- Bebibas
-	('Café', 'Caneca', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/coffee_2.jpg" alt="">'), -- Bebibas
+	('Café', 'Caneca', 21, 'Bebida', 'Alimentação', '<img src="../assets/imgs/coffee.jpg" alt="">'), -- Bebibas
 	('Refrigerante', 'Lata', 6, 'Bebida', 'Alimentação', '<img src="../assets/imgs/refrigerante.jpg" alt="">'), -- Bebibas
 	('Cerveja', 'lata', 12, 'Bebida', 'Alimentação', '<img src="../assets/imgs/beer_2.jpg" alt="">'), -- Bebibas
-	('Suco fresco', 'Copo', 28, 'Bebida', 'Alimentação', '<img src="../assets/imgs/juice_2.jpg" alt="">'), -- Bebibas
-	('Bebida de lata', 'Suco em lata', 5.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/juice_3.jpg" alt="">'), -- Bebibas
-	('Bebida de garrafa', 'Suco em garrafa de 300 - 500ml', 7.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/juice_bottle.jpg" alt="">'), -- Bebibas
+	('Suco fresco', 'Copo', 28, 'Bebida', 'Alimentação', '<img src="../assets/imgs/fresh_juice.jpg" alt="">'), -- Bebibas
+	('Bebida de lata', 'Suco em lata', 5.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/canned_juice.jpg" alt="">'), -- Bebibas
+	('Bebida de garrafa', 'Suco em garrafa de 300 - 500ml', 7.00, 'Bebida', 'Alimentação', '<img src="../assets/imgs/bottled_juice.jpg" alt="">'), -- Bebibas
     
 	('Taiyaki', 'Bolinho frito em formato de peixe com recheio (creme/doce de feijão)', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/taiyaki.jpg" alt="">'), -- Doces
 	('Mochi', 'Bolinho feito com farinha de arroz recheado com doce de feijão', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/mochi_2.jpg" alt="">'), -- Doces
@@ -113,7 +112,7 @@ INSERT INTO item (nomeItem, descricao, preco, tipo, categoria, foto) VALUES
 	('Parfait japonês', 'Taça de sorvete com frutas, chantilly e cereal,', 40, 'Doces', 'Alimentação', '<img src="../assets/imgs/parfait_2.jpg" alt="">'), -- Doces
 	('Dango', 'Bolinho feito com farinha de arroz e molho doce de shoyu', 10, 'Doces', 'Alimentação', '<img src="../assets/imgs/dango.jpg" alt="">'), -- Doces
 	('Cheesecake japonês', 'Cheesecake tradicional', 30, 'Doces', 'Alimentação', '<img src="../assets/imgs/cheesecake.jpg" alt="">'), -- Doces
-	('Sorvete', 'Bola de sorvete', 21, 'Doces', 'Alimentação', '<img src="../assets/imgs/chinese_food.jpg" alt="">'), -- Doces
+	('Sorvete', 'Bola de sorvete', 21, 'Doces', 'Alimentação', '<img src="../assets/imgs/icecream.jpg" alt="">'), -- Doces
 	('Crepe', 'Crepe doce com recheio de chantilly, frutas e caldas', 21, 'Doces', 'Alimentação', '<img src="../assets/imgs/crepe_4.jpg" alt="">'), -- Doces
 	('Confeitarias especiais', 'Doces tradicionais japoneses', 40, 'Doces', 'Alimentação', '<img src="../assets/imgs/wahashi.jpg" alt="">'), -- Doces
     
